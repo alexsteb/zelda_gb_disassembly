@@ -1,95 +1,31 @@
-	jp .l_2872
-	nop
-	nop
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
+; rst vectors
+SECTION "rst 00", ROM0 [$00]
+  	jp .l_2872
+  
+SECTION "rst 08", ROM0 [$08]
+	rst $38  
+SECTION "rst 10", ROM0 [$10]
+	rst $38  
+SECTION "rst 18", ROM0 [$18]
+	rst $38  
+SECTION "rst 20", ROM0 [$20]
+	rst $38 
+SECTION "rst 28", ROM0 [$28]
+	rst $38	
+SECTION "rst 38", ROM0 [$38]
+	rst $38
+
+; Hardware interrupts
+SECTION "vblank", ROM0 [$40]
 	jp .l_0525
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
+SECTION "hblank", ROM0 [$48]
 	jp .l_03e2
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
+SECTION "timer",  ROM0 [$50]
 	reti
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	reti
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	reti
-	rst 38
+SECTION "serial", ROM0 [$58]
+	reti	
+SECTION "joypad", ROM0 [$60]
+	reti	
 
 .l_0062:
 	ld hl, $6900
@@ -121,119 +57,12 @@
 	ld a, $0c
 	ld [$2100], a
 	ret
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
-	rst 38
+	
+SECTION "Entry", ROM0 [$100]
 	nop
-	jp .l_0150
+	jp .Start
+
+SECTION "Header", ROM0 [$104]
 	db ce, ed, 66, 66, cc, 0d, 00, 0b, 03, 73, 00, 83, 00, 0c, 00, 0d, 
 	db 00, 08, 11, 1f, 88, 89, 00, 0e, dc, cc, 6e, e6, dd, dd, d9, 99, 
 	db bb, bb, 67, 63, 6e, 0e, ec, cc, dd, dc, 99, 9f, bb, b9, 33, 3e, 
@@ -250,7 +79,7 @@
 	db $6a		;header check [ok]
 	db $3a, $ee	;global check [ok]
 
-.l_0150:
+.Start:
 	call func_2881
 	ld sp, $dfff
 	xor a
